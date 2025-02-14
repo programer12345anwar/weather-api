@@ -8,18 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.weather.weather_api.service.WeatherService;
 
+
 @RestController
 @RequestMapping("/api/v1/weather")
 public class WeatherController {
 
     @Autowired
-    private WeatherService weatherService;
+    WeatherService weatherService;
 
     @GetMapping("/")
     public Object getCityWeather(@RequestParam String city){
-
         return weatherService.getCityWeather(city);
-    
     }
-    
 }

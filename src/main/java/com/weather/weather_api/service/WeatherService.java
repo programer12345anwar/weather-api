@@ -7,8 +7,10 @@ import com.weather.weather_api.repository.WeatherRepository;
 
 @Service
 public class WeatherService {
+
     @Autowired
-    private WeatherRepository weatherRepository;
+    WeatherRepository weatherRepository;
+
     public Object getCityWeather(String city){
         return weatherRepository.getCityWeather(city);
     }
