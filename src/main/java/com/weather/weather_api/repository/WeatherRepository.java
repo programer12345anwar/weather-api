@@ -12,7 +12,7 @@ import java.net.URI;
 @Repository
 public class WeatherRepository {
 
-    @Value("${weather.api.accesskey}")
+    @Value("${weather.api.accesskey}")//Spring Boot is using the @Value annotation to inject a value from the application.properties or application.yml file into the accessKey field.
     String accessKey;
 
     public Object getCityWeather(String city){
@@ -28,6 +28,56 @@ public class WeatherRepository {
         return response.getBody();
     }
 }
+/*Code Breakdown
+ 
+RequestEntity request = RequestEntity.get(finalURL).build();
+RequestEntity is a Spring class used to create an HTTP request.
+RequestEntity.get(finalURL).build() creates a GET request with the provided URL (finalURL).
+This request does not have additional headers or a request body.
+ ====================================================================
+RestTemplate restTemplate = new RestTemplate();
+RestTemplate is a Spring class used to make HTTP requests.
+It helps communicate with REST APIs by sending HTTP requests and receiving responses.
+===================================================================
+ResponseEntity<Object> response  = restTemplate.exchange(finalURL, HttpMethod.GET, request, Object.class);
+
+exchange() is a method in RestTemplate that executes an HTTP request.
+Parameters:
+finalURL → The endpoint being called.
+HttpMethod.GET → Specifies the HTTP method (GET request).
+request → The RequestEntity object (which includes URL and headers).
+Object.class → The expected response type.
+response stores the API's response wrapped in ResponseEntity<Object>.
+===================================================================
+return response.getBody();
+response.getBody() extracts the response content (the actual data received from the API).
+This value is returned as the final output.
+===================================================================
+Simplified Explanation
+This code:
+
+Creates an HTTP GET request to finalURL.
+Uses RestTemplate to send the request.
+Receives the API response.
+Returns the response body.
+===================================================================
+Example Usage
+Assume finalURL = "https://api.weather.com/data", then:
+
+String finalURL = "https://api.weather.com/data";
+RestTemplate restTemplate = new RestTemplate();
+ResponseEntity<String> response = restTemplate.exchange(finalURL, HttpMethod.GET, null, String.class);
+System.out.println(response.getBody()); // Prints API response
+===================================================================
+Alternative Approach (Using getForObject())
+Instead of exchange(), you can use:
+
+String response = restTemplate.getForObject(finalURL, String.class);
+return response;
+This is simpler when sending a basic GET request.
+
+Would you like help adding headers or handling errors in this request? 🚀 
+===================================================================*/
 
 // import java.net.URI;
 // import java.net.URISyntaxException;
