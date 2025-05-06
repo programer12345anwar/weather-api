@@ -5,7 +5,7 @@ import axios from "axios";
 
 function App() {
     const [city, setCity] = useState("");
-    const [weather, setWeather] = useState(null);
+    const [weather, setWeather] = useState(null);//b'z it will return object
     const [error, setError] = useState("");
 
     const fetchWeather = async () => {
